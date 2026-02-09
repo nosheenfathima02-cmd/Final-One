@@ -37,6 +37,11 @@ let currentModal = null;
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🚀 Nousheen\'s Life Tracker starting...');
+        // Ask notification permission on first load
+    if ('Notification' in window && Notification.permission === 'default') {
+        Notification.requestPermission();
+    }
+
     loadData();
     renderAll();
     checkDailyReset();
@@ -552,6 +557,8 @@ function scheduleNotification(reminder) {
                 icon: 'icon-192.png',
                 requireInteraction: true
             });
+            new Audio('https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg').play();
+
         }, timeUntil);
     }
 }
